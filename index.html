@@ -68,7 +68,16 @@ function t_onFuncLoad(funcName,okFunc,time) {if(typeof window[funcName]==='funct
          url('assets/fonts/KZPFChampionScriptPro-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
+    font-display: block;
+}
+/* iOS Safari table-cell rendering clips script-font descenders for "Қыз ұзату".
+   Switch to flex so the compositor layer wraps descenders properly. */
+#rec867072091 .tn-elem[data-elem-id="1739716295515"] .tn-atom {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 12px;
+    overflow: visible !important;
 }
 @keyframes heartPulse {
   0%, 100% { transform: scale(1); }
