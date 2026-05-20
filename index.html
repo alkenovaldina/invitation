@@ -339,6 +339,21 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
 
 
 <script>
+// iOS Safari does not recompute layout when a custom font swaps in,
+// so script-font descenders ("Қыз ұзату") get clipped until a scroll
+// triggers a repaint. Force a reflow once fonts have loaded.
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(function() {
+    document.querySelectorAll('[data-elem-id="1739716295515"]').forEach(function(el) {
+      var d = el.style.display;
+      el.style.display = 'none';
+      void el.offsetHeight;
+      el.style.display = d;
+    });
+  });
+}
+</script>
+<script>
 // Tilda calculates layout zoom only on initial load — rotating breaks it.
 // Force a reload on orientation change so the page recomputes from scratch.
 (function() {
