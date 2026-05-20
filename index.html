@@ -338,8 +338,23 @@ window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.
 
 
 
-
-
-
+<script>
+// Tilda calculates layout zoom only on initial load — rotating breaks it.
+// Force a reload on orientation change so the page recomputes from scratch.
+(function() {
+  var lastOrientation = window.matchMedia('(orientation: portrait)').matches ? 'portrait' : 'landscape';
+  function handleOrientationChange() {
+    var current = window.matchMedia('(orientation: portrait)').matches ? 'portrait' : 'landscape';
+    if (current !== lastOrientation) {
+      lastOrientation = current;
+      setTimeout(function() { window.location.reload(); }, 250);
+    }
+  }
+  window.addEventListener('orientationchange', handleOrientationChange);
+  if (window.matchMedia) {
+    window.matchMedia('(orientation: portrait)').addEventListener('change', handleOrientationChange);
+  }
+})();
+</script>
 </body>
  </html>
